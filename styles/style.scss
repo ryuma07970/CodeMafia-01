@@ -1,0 +1,42 @@
+// @import "mobile.scss" screen and (max-width: 60px);//scssファイルを読み込む為の記述
+
+// @import url("mobile.css") screen and (max-width: 60px);//cssファイルを読み込む為の記述
+// @import url("desktop.css") screen and (min-width: 601px);//cssファイルを読み込む為の記述
+
+@import "modules/variables";
+@import "modules/mixin";
+@import "modules/appear";
+@import "modules/button";
+@import "modules/hero-slider";
+@import "modules/text-animeation";
+@import "modules/image-slide";
+@import "modules/mobile-menu";
+
+
+
+@import "breakpoints/base";//モバイルのスタイルをベースにして記述していく
+
+@media (min-width: 480px) {
+  @import "breakpoints/480up";//スマホを傾けた時に対応する幅
+}
+
+@media (min-width: 600px) {
+  @import "breakpoints/600up";//タブレット幅、対応
+}
+
+@media (min-width: 960px) {
+  @import "breakpoints/960up";//タブレットを傾けた時もしくは、小さいPC幅、対応
+}
+
+@media (min-width: 1280px) {
+  @import "breakpoints/1280up";//デスクトップ幅、対応
+}
+
+@media (min-resolution: 192dpi),
+        (-webkit-min-device-pixel-ratio: 2) {
+  @import "breakpoints/2x";//retinaディスプレイ、対応
+}
+
+@media print {
+  @import "breakpoints/print";//印刷表示のみ対応
+}

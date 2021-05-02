@@ -1,0 +1,404 @@
+/******************************************************************
+
+Stylesheet: ベーススタイル
+
+******************************************************************/
+
+
+// ユーティリティークラス
+body {
+  font-family: 'Kameron', 'Yusei Magic', sans-serif;
+}
+
+img {
+  max-width: 100%;
+  vertical-align: bottom;
+}
+
+.font-sm {
+  font-size: 14px;
+}
+.font-md {
+  font-size: 17px;
+}
+.font-lr {
+  font-size: 19px;
+}
+.font-lg {
+  font-size: 25px;
+}
+
+.mb-sm {
+  margin-bottom: 16px !important;
+}
+.mb-lg {
+  margin-bottom: 80px !important;
+}
+
+.pb-sm {
+  padding-bottom: 16px !important;
+}
+.pb-lg {
+  padding-bottom: 80px !important;
+}
+
+.content-width {
+  width: 90%;
+  margin: 0 auto;
+  max-width: $contentMaxWidth;//1070px
+}
+
+.flex {
+  display: flex;
+  flex-direction: column;//縦に並べる
+}
+
+.ls {
+  letter-spacing: .1em;
+}
+
+// ユーティリティークラス/
+
+.main-title {
+  @extend .font-lg;
+  font-weight: 600;
+  margin-bottom: 0;
+  display: block
+}
+
+.sub-title {
+  @extend .font-sm;
+  color: $cSubTitle;
+}
+
+.purple {
+  color: $cWineRed;
+}
+
+#main-content {
+  position: relative;
+  z-index: 0;
+}
+
+#container {
+  background-color: $cWhite;
+  position: relative;
+  z-index: 2;
+  transition: transform 0.5s, box-shadow 0.5s;
+}
+
+main {
+  position: relative;
+  z-index: -1;
+}
+
+.header {
+  //表示を固定する<
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: $navHeight;
+  z-index: 100;
+  //表示を固定する>
+  background-color: transparent;//背景色を透明にする時に使う。
+  height: 100px;
+  display: flex;
+  align-items: center;
+
+  &.triggerad {
+    background-color: rgba(255,255,255,0.9);
+    box-shadow: 10px 0 25px -10px rgba(0,0,0,0.5);
+  }
+
+  &__nav {
+    display: none;
+  }
+
+  &__nav {
+    @extend .flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+  }
+
+  &__ul {
+    display: flex;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  &__li {
+    margin-left: 20px;
+
+    & > a {
+      color: $cBlack;
+      text-decoration: none;//ホバー時に下線を無くす。
+      text-transform: uppercase;//文字を大文字にする。
+    }
+  }
+
+  & .logo {
+    font-size: 38px;
+    justify-content: center;
+  }
+
+  &__inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    @extend .content-width;
+  }
+}
+
+.travel {
+  @extend .content-width;
+  @extend .mb-lg;
+
+  &__inner {
+    @extend .flex;
+    justify-content: space-between;
+    padding: 15px;
+    background-color: $cBgGray;
+    position: relative;
+    z-index: 0;
+  }
+
+  &__title {
+    position: relative;
+
+    @include p-base(
+      $display: none,
+      $width: 100px,
+      $height: 1px,
+      $top: 50%,
+      $left: -120px
+    ) {
+      background-color: $cBlack;
+      transform: translateY(-50%) scaleX(0);
+      transition: transform 0.3s ease 1.6s;
+      transform-origin: right;
+    }//mixinの記述
+  }
+
+  &__sub {
+    @extend .mb-sm;
+  }
+
+  &__img {
+    height: 300px;
+    @extend .mb-sm;
+    transition: box-shadow 1ms linear 0.8s;//0.8秒後に画像の内側に影が表示される。
+    
+    & > img {
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
+      // この記述で親要素の縦横100%でfitする。
+      position: relative;
+      z-index: -1;
+      //画像の内側に影をつける為の記述
+    }
+
+    &.inview {
+      box-shadow: inset 0 0 30px $cBlack;//画像の内側に影
+    }
+  }
+
+  &__texts {
+    @extend .mb-sm;
+
+    &.inview {
+      & .travel__title::before {
+        transform: translateY(-50%);
+      }
+    }
+  }
+}
+
+.houses {
+  @extend .content-width;
+  @extend .mb-lg;
+
+  &__inner {
+    @extend .flex;
+  }
+
+  &__title {
+    @extend .font-lr;
+    @extend .mb-sm;
+  }
+
+  &__btn {
+    text-align: center;
+    flex-basis: 100%;//値の指定はwidthと一緒
+  }
+}
+
+.popular {
+  &__inner {
+    position: relative;
+    @include p-base($top: 10%, $height: 90%) {
+      background-color: $cBgGray;
+    }//mixinの記述↓の、&::beforeと同じ効果。
+
+    // &::before {
+    //   content: '';
+    //   position: absolute;
+    //   bottom: 0;
+    //   left: 0;
+    //   width: 100%;
+    //   height: 90%;
+    //   background-color: $cBgGray;
+    // }
+  }
+
+  &__header {
+    @extend .content-width;
+  }
+
+  &__container {
+    position: relative;
+    z-index: 2;
+    @extend .flex;
+    @extend .content-width;
+    @extend .pb-sm;
+  }
+
+  &__title {
+    @extend .font-md;
+    @extend .mb-sm;
+  }
+
+  &__btn {
+    text-align: center;
+    flex-basis: 100%;//値の指定はwidthと一緒
+    @extend .mb-lg;
+  }
+
+  &__img {
+    height: 150px;
+    overflow: hidden;//はみ出た部分は非表示になるように
+    margin-bottom: 5px;
+
+    & > img {
+      object-fit: cover;
+      height: 100%;
+      width: 100%;
+      //写真をうまい具合に表示して写真全体の中央部分を表示している（デフォルト）。
+    }
+  }
+}
+
+.logo {
+  font-size: 47px;
+  display: flex;
+
+  &__img {
+    width: 0.7em;
+  }
+
+  &__world {
+    color: $cWineRed;
+  }
+}
+
+.footer {
+  padding: 60px 0;
+  @extend .content-width;
+
+  &__nav {
+    @extend .flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+  }
+
+  &__ul {
+    @extend .flex;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  &__li {
+    padding: 0;
+    margin: 10px;
+
+    & > a {
+      color: $cSubTitle;
+    }
+  }
+
+  & .logo {
+    font-size: 38px;
+    justify-content: center;
+  }
+}
+
+.side {
+  display: none;
+  position: fixed;
+  top: 70%;
+  transform: translateY(-50%);
+  transition: all 0.3s ease-in;
+
+  & .tween-animate-title {
+    color: $cBlack;
+    text-decoration: none !important;
+    margin: 0 40px;
+    letter-spacing: 2px;
+    vertical-align: middle;//インライン要素を中量揃えにする時に使われる
+  }
+
+  &.left {
+    left: -50px;
+    
+    &.inview {
+      left: 50px;
+    }
+
+    & .side__inner {
+      transform-origin: top left;
+      transform: rotate(-90deg);
+    }
+  }
+
+  &.right {
+    right: -50px;
+
+    &.inview {
+      right: 50px;
+    }
+
+    & .side__inner {
+      transform-origin: top right;
+      transform: rotate(90deg);
+    }
+  }
+}
+
+.icon {
+  position: relative;
+
+  @include p-base($left: -20px, $top: 50%, $width: 1em, $height: 1em) {
+    transform: translateY(-50%);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+
+  &.twitter {
+    &::before {
+      background-image: url('../images/twitter.svg');
+    }
+  }
+
+  &.fb {
+    &::before {
+      background-image: url('../images/facebook.svg');
+    }
+  }
+}
